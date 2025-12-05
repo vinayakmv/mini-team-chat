@@ -54,53 +54,63 @@ Node.js
 Express.js
 MongoDB + Mongoose
 
+📁 Folder Structure
+
+mini-team-chat/
+│
+├── client/              # React Frontend
+│   ├── public/
+│   ├── src/
+│   │   ├── components/
+│   │   ├── pages/
+│   │   ├── styles.css
+│   │   ├── api.js
+│   │   ├── socket.js
+│   │   ├── App.jsx
+│   │   └── index.jsx
+│   └── package.json
+│
+├── server/              # Node Backend
+│   ├── config/
+│   ├── controllers/
+│   ├── middleware/
+│   ├── models/
+│   ├── routes/
+│   ├── server.js
+│   └── package.json
+│
+└── README.md
+
+
 
 🧩 How It Works (System Flow)
 1️⃣ User Authentication
-
 User registers or logs in
-
 Server issues JWT token
-
 Token stored in localStorage
-
 Protected routes check token
 
 2️⃣ Socket Connection
-
 Once logged in:
-
 socket.emit("joinApp", { id: user._id, name: user.name });
-
-
 Server tracks online users in memory and broadcasts presence.
 
 3️⃣ Channels
-
 User selects or creates a channel
-
 Client sends:
-
 socket.emit("joinChannel", channelId)
 
 4️⃣ Messaging
 
 Messages are stored in MongoDB
-
 Sent instantly using:
-
 socket.emit("sendMessage", payload)
-
-
 Server broadcasts to everyone in that channel.
 
 5️⃣ Typing Indicator
 
 When user types, client emits:
-
 socket.emit("typing", { channelId, userId })
-
-
 Server forwards to other users.
 
 ▶️ Setup & Installation
